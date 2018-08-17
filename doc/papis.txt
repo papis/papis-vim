@@ -1,0 +1,32 @@
+*papis.txt* support for papis, command line bibliography manager
+
+                 ____             _       ~
+                |  _ \ __ _ _ __ (_)___   ~
+                | |_) / _` | '_ \| / __|  ~
+                |  __/ (_| | |_) | \__ \  ~
+                |_|   \__,_| .__/|_|___/  ~
+                           |_|            ~
+                
+       support for papis, command line bibliography manager         
+
+===========================================================
+Contents                                    *PapisContents*
+
+1. Introduction ............|PapisIntro|
+2. Usage ...................|PapisUsage|
+3. Mappings ................|PapisMappings|
+4. Configuration ...........|PapisConfiguration|
+5. License .................|PapisLicense|
+
+
+
+===========================================================
+Section 1: Introduction                          *PapisIntro*
+===========================================================
+Section 2: Usage                                 *PapisUsage*
+===========================================================
+Section 3: Mappings                           *PapisMappings*
+===========================================================
+Section 4: Configuration                 *PapisConfiguration*
+===========================================================
+Section 5: License                             *PapisLicense*
