@@ -20,4 +20,6 @@ Add these lines to the `.vimrc`:
 
 The `:Papis` command will open a search window for your bibliographic database. `Enter` command will insert citation for the selected record in the current buffer.
 
-## Configuration
+## Documentation
+
+For more information, execute `:help papis` in Vim.
