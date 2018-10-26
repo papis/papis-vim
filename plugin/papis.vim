@@ -26,14 +26,11 @@ function! s:handler(a)
     let candidates = []
     for line in citations
       let id = matchlist(line, pat)[1]
-      call add(candidates, "\\cite{". id . "}")
+      call add(candidates, substitute(id, "/", "", "g"))
     endfor
   endif
 
-  for candidate in candidates
-    execute join([cmd, candidate])
-  endfor
-
+  execute "normal a\\cite{" . join(candidates, ", ") . "}\egql"
 endfunction
 
 
