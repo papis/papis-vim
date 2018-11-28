@@ -48,10 +48,26 @@ function! s:handler(a)
 endfunction
 
 let g:PapisFormat = '"{doc[author]}: {doc[title]}'
-let g:PapisBackend = 'whoosh'
+let g:PapisBackend = ''
 
-command! -bang -nargs=* Papis
-      \ call fzf#run(fzf#wrap({'source': 'papis list "*" <args> --format ' . g:PapisFormat . ' @{doc[ref]}"', 'sink*': function('<sid>handler'), 'options': '--multi --expect=ctrl-y --print-query'}))
+function! s:getPapisBackend()
+  if g:PapisBackend ==# ''
+    let g:PapisBackend = systemlist('papis config database-backend')[0]
+  endif
+  return g:PapisBackend
+endfunction
+
+function! s:Papis(searchline)
+  let l:searchinp = a:searchline
+  if l:searchinp ==# ''
+    if s:getPapisBackend() ==# "whoosh"
+      let l:searchinp = '"*"'
+    endif
+  endif
+  call fzf#run(fzf#wrap({'source': 'papis list ' . l:searchinp . ' --format ' . g:PapisFormat . ' @{doc[ref]}"', 'sink*': function('s:handler'), 'options': '--multi --expect=ctrl-y --print-query'}))
+endfunction
+
+command! -bang -nargs=* Papis call s:Papis('<args>')
 
 function! s:get_citeref(cite, full_list)
   for l:ref in a:full_list
@@ -84,6 +100,11 @@ function! s:get_cite_under_cursor()
 endfunction
 
 function! s:PapisView()
+  if s:getPapisBackend() !=# "whoosh"
+    echom "PapisView only works for Papis with whoosh as database-backend at the moment"
+    return
+  endif
+
   let l:cite = s:get_cite_under_cursor()
   if l:cite ==# ""
     return
@@ -94,5 +115,4 @@ function! s:PapisView()
   call system('papis open "ref:' . l:ref . '"')
 endfunction
 
-command! -bang PapisView
-      \ call s:PapisView()
+command! -bang PapisView call s:PapisView()
