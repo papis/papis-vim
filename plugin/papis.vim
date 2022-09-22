@@ -78,7 +78,7 @@ function! s:get_citeref(cite, full_list)
 endfunction
 
 function! s:get_all_citerefs()
-  return systemlist('papis list "ref:*" --format "{doc[ref]}"')
+  return systemlist('papis list "ref:*" --format "{doc[ref]}" --all')
 endfunction
 
 function! s:get_cite_under_cursor()
